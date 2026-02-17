@@ -7,6 +7,8 @@ const loadTrendingProducts =()=>{
     })
 }
 
+
+
 const displayTrendingProducts = (products)=>{
     const trendingContainer = document.getElementById("trending-container");
     trendingContainer.innerHTML = "";
@@ -46,3 +48,6 @@ const displayTrendingProducts = (products)=>{
 
 
 loadTrendingProducts()
+
+
+
