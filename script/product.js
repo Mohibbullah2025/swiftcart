@@ -15,6 +15,31 @@ const loadProductByCategory = (category)=>{
     .then(data => showProductByCategory(data))
 }
 
+const loadProductDetails=async(id)=>{
+    const url = `https://fakestoreapi.com/products/${id}`;
+    const res =await fetch(url);
+    const details = await res.json();
+    
+    showProductsDetails(details)
+}
+
+const showProductsDetails = (product)=>{
+    const detailsContainer = document.getElementById("details-container");
+    detailsContainer.innerHTML =`
+    <div class="card w-96 bg-base-100 card-sm shadow-sm">
+  <div class="card-body">
+    <h2 class="card-title">${product.title}</h2>
+    <p>${product.description}</p>
+    <p>${product.price}</p>
+    <p>${product.rating.rate}</p>
+    <div class="justify-end card-actions">
+      <button class="btn btn-primary mt-8">Buy Now</button>
+    </div>
+  </div>
+    </div>
+    `
+    document.getElementById("product_modal").showModal()
+}
 const showCategories = (categories)=>{
     const categoryContainer = document.getElementById("category-container");
     // categoryContainer.innerHTML = "";
@@ -95,7 +120,7 @@ const showAllproducts = (allProducts)=>{
     <p class="text-xl font-semibold">${product.title}</p>
     <p class="text-xl font-semibold">${product.price}</p>
     <div class="card-actions justify-between mt-4 ">
-      <div class="btn btn-outline px-12"><i class="fa-solid fa-circle-info"></i>Details</div>
+      <div onclick="loadProductDetails(${product.id})" class="btn btn-outline px-12"><i class="fa-solid fa-circle-info"></i>Details</div>
       <div class="btn btn-primary px-12"><i class="fa-solid fa-cart-shopping"></i> Add</div>
     </div>
     </div>
